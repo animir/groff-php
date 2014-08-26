@@ -1,0 +1,14 @@
+{
+    "name": "animir/groff-php",
+    "description": "Wrapper for groff.",
+    "authors": [
+        {
+            "name": "animir",
+            "email": "animir@ya.ru"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "groff": ">=1.22.0"
+    }
+}
