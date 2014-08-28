@@ -70,7 +70,7 @@ class Groff {
         );
 
         exec($command, $output);
-
+        unlink($tmpFile);
         return implode("\n", $output);
     }
 }
