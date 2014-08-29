@@ -60,4 +60,24 @@ system</p>
 HTML;
         $this->assertEquals(trim($cmpHtml), trim($html));
     }
+    
+    public function testGetManPart() {
+        $mandoc = <<<MANDOC
+TEST
+
+         test       this is the test
+
+
+TEST2
+
+
+         This is the text
+MANDOC;
+        $exceptPart = <<<PART
+         test       this is the test
+PART;
+        $groff = new Groff();
+        $part = $groff->getManPart($mandoc, 'TEST');
+        $this->assertSame($exceptPart, $part);
+        }
 }

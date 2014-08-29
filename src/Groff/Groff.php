@@ -73,4 +73,20 @@ class Groff {
         unlink($tmpFile);
         return implode("\n", $output);
     }
+    
+    /**
+     * Return part of mandoc document by first level header
+     * 
+     * @param string $mandoc
+     * @param string $header
+     * @return string|null
+     */
+    public function getManPart($mandoc, $header) {
+        preg_match("/$header\R\R(.+)\R\R\R/msU", $mandoc, $matches);        
+        if (isset($matches[1])) {
+            return $matches[1];
+        } else {
+            return null;
+        }
+    }
 }
