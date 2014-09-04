@@ -89,4 +89,20 @@ class Groff {
             return null;
         }
     }
+    
+    /**
+     * Get table data from mandoc by firtColumn content
+     * 
+     * @param type $mandoc
+     * @param string $firstRow
+     * @return string|null
+     */
+    public function getTable($mandoc, $firstRow) {
+        preg_match("/\R\R(\s+$firstRow\R.+)\R\R/msU", $mandoc, $matches);        
+        if (isset($matches[1])) {
+            return $matches[1];
+        } else {
+            return null;
+        }        
+    }
 }

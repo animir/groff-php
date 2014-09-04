@@ -79,5 +79,28 @@ PART;
         $groff = new Groff();
         $part = $groff->getManPart($mandoc, 'TEST');
         $this->assertSame($exceptPart, $part);
-        }
+    }
+    
+    public function testGetTable() {
+        $mandocPart = <<<MANDOC
+some text
+another some text
+
+       123  test
+       next row
+       456  test
+
+some text
+MANDOC;
+        $exceptTable = <<<TABLE
+       123  test
+       next row
+       456  test
+TABLE;
+        $groff = new Groff();
+        $table = $groff->getTable($mandocPart, '123  test');
+        $this->assertSame($exceptTable, $table);
+
+        
+    }
 }
