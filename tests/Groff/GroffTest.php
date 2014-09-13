@@ -100,7 +100,23 @@ TABLE;
         $groff = new Groff();
         $table = $groff->getTable($mandocPart, '123  test');
         $this->assertSame($exceptTable, $table);
-
         
+    }
+    
+    public function testGetArrayFromTable() {
+        $tableString = <<<TABLE
+       123   test
+       next  row text and
+             part of prev row
+       456   test
+TABLE;
+        $exceptTableArray = [
+          ['123', 'test'],
+          ['next', 'row text and part of prev row'],
+          ['456', 'test']
+        ];
+        $groff = new Groff();
+        $tableArray = $groff->getArrayFromTable($tableString);
+        $this->assertEquals($exceptTableArray, $tableArray);
     }
 }

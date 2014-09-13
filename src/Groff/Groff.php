@@ -105,4 +105,48 @@ class Groff {
             return null;
         }        
     }
+    
+    /**
+     * Get two columns array from mandoc table with two columns in string
+     * For this string:
+     *<<<TABLE
+     * 123   test
+     * next  row text and
+     *         part of prev row
+     * 456   test
+     * TABLE;
+     * 
+     * Array:
+     * [
+     *    ['123', 'test'],
+     *    ['next', 'row text and part of prev row'],
+     *    ['456', 'test']
+     * ];
+     * 
+     * 
+     * @param string $tableString
+     * @return array
+     */
+    public function getArrayFromTable($tableString) {
+        $tableArray = [];
+        $rowsArray = preg_split('#\R#', $tableString);
+        
+        if (count($rowsArray) === 0) return $tableArray;
+        
+        preg_match("#(\s+)\S+.+#", $rowsArray[0], $matches);
+        $countStartSpaces = strlen($matches[1]);
+        foreach($rowsArray as $row) {
+            preg_match("#(\s+)\S+.+#", $row, $matches);
+            if (strlen($matches[1]) === $countStartSpaces) {
+                preg_match("#\s+(\S+)\s{2,}(.+)#", $row, $matches);                
+                $tableArray []= [$matches[1], $matches[2]];
+            } else {
+                preg_match("#\s+(.+)#", $row, $matches);
+                end($tableArray);
+                $tableArray [key($tableArray)][1] .= ' ' . $matches[1];
+            }
+        }
+        
+        return $tableArray;
+    }
 }
