@@ -98,7 +98,8 @@ class Groff {
      * @return string|null
      */
     public function getTable($mandoc, $firstRow) {
-        preg_match("/\R\R(\s+$firstRow\R.+)\R\R/msU", $mandoc, $matches);        
+        $firstRow = addslashes($firstRow);
+        preg_match("/\R\R(\s*$firstRow.+)\R\R/msU", $mandoc, $matches);         
         if (isset($matches[1])) {
             return $matches[1];
         } else {
