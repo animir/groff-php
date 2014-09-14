@@ -82,7 +82,8 @@ class Groff {
      * @return string|null
      */
     public function getManPart($mandoc, $header) {
-        preg_match("/$header\R\R(.+)\R\R\R/msU", $mandoc, $matches);        
+        $header = preg_quote($header);
+        preg_match("/^$header$(\R\R.+\R\R)\R/msU", $mandoc, $matches);        
         if (isset($matches[1])) {
             return $matches[1];
         } else {
@@ -98,7 +99,7 @@ class Groff {
      * @return string|null
      */
     public function getTable($mandoc, $firstRow) {
-        $firstRow = addslashes($firstRow);
+        $firstRow = preg_quote($firstRow);
         preg_match("/\R\R(\s*$firstRow.+)\R\R/msU", $mandoc, $matches);         
         if (isset($matches[1])) {
             return $matches[1];
