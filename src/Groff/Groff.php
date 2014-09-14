@@ -140,7 +140,11 @@ class Groff {
         foreach($rowsArray as $row) {
             preg_match("#(\s+)\S+.+#", $row, $matches);
             if (strlen($matches[1]) === $countStartSpaces) {
-                preg_match("#\s+(\S+)\s{2,}(.+)#", $row, $matches);                
+                preg_match("#\s+(\S+)\s{2,}(.+)#", $row, $matches);
+                if (!isset($matches[1])) {
+                    preg_match("#\s+(\S+)\s(.+)#", $row, $matches);
+                }
+                if (!isset($matches[1])) continue; // если строку невозможно распарсить
                 $tableArray []= [$matches[1], $matches[2]];
             } else {
                 preg_match("#\s+(.+)#", $row, $matches);
