@@ -17,7 +17,12 @@ class Groff {
         'lbp',
         'lj4',
         'ps',
-        'pdf'
+        'pdf',
+        
+        'ascii',
+        'cp1047',
+        'latin1',
+        'utf8'
     ];
     
      /**
