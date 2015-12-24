@@ -55,7 +55,7 @@ class Groff {
     public function convert($string, $to = 'html')
     {
         if ( ! in_array($to, $this->outFormat)) {
-            throw new Exception(
+            throw new \Exception(
                 sprintf('%s is not a valid real device for groff. See "man groff"', $to)
             );
         }
