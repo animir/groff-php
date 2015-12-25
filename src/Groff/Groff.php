@@ -18,7 +18,6 @@ class Groff {
         'lj4',
         'ps',
         'pdf',
-        
         'ascii',
         'cp1047',
         'latin1',
