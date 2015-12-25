@@ -17,7 +17,12 @@ class Groff {
         'lbp',
         'lj4',
         'ps',
-        'pdf'
+        'pdf',
+        
+        'ascii',
+        'cp1047',
+        'latin1',
+        'utf8'
     ];
     
      /**
@@ -55,7 +60,7 @@ class Groff {
     public function convert($string, $to = 'html')
     {
         if ( ! in_array($to, $this->outFormat)) {
-            throw new Exception(
+            throw new \Exception(
                 sprintf('%s is not a valid real device for groff. See "man groff"', $to)
             );
         }
